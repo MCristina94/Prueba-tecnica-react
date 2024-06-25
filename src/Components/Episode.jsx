@@ -23,9 +23,7 @@ const Episode = () => {
             }
             const data = await response.json();
             setEpisodes(data.results);
-            setPageInfoEpisode(data.info);
-            setCharactersEpisode(data.results.characters)
-            
+            setPageInfoEpisode(data.info);            
         }catch(error){
             console.error('Error: ', error);
         }
@@ -40,7 +38,7 @@ const Episode = () => {
     }
   return ( 
     <>
-        <h1 className='text-center m-2 font-bold text-3xl'>EPISODES</h1>
+        <h2 className='text-center m-2 font-bold text-3xl'>EPISODES</h2>
         <section className='flex justify-center'>
            <div className='grid sm:grid-cols-2 md:grid-cols-3 gap-5 max-w-screen-lg'>
                 {episodes && episodes.map(episode => <CardEpisode key={episode.id} episode={episode}/>)}

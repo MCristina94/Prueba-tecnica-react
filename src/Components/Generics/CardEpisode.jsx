@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from 'react'
 
 const CardEpisode = ({episode}) => {
+
+    const [charactersEpisode, setCharactersEpisode] = useState([]);
     
+    useEffect(() => {
+        setCharactersEpisode(episode.characters)
+    }, [])
+
   return (
     <section className='w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700'>
         <article className="flex items-center justify-between mb-4">
@@ -14,9 +20,6 @@ const CardEpisode = ({episode}) => {
             <p className='text-cod-gray-header-hover'>Air Date: {episode.air_date}</p>
             <p className='text-cod-gray-header-hover'>Created: {episode.created}</p>
         </article>
-        <div>
-            <button className='my-5 px-6 py-2 min-w-[120px] text-center text-blue-600 border border-blue-600 rounded hover:bg-blue-600 hover:text-white active:bg-blue-500 focus:outline-none focus:ring'>View Characers</button>
-        </div>
     </section>
   )
 }
