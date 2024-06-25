@@ -1,6 +1,9 @@
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Header from './Components/Header';
 import Home from './Components/Home';
+import Episode from './Components/Episode'
+import Location from './Components/Location'
 
 function App() {
   return (
@@ -9,7 +12,12 @@ function App() {
         <Header/>
       </header>
       <main>
-        <Home/>
+        <Routes>
+          <Route path='/' element={<Home/>}/>
+          <Route path='/episode' element={<Episode/>}/>
+          <Route path='/location' element={<Location/>}/>
+        </Routes>
+        
       </main>
       <footer>
       </footer>

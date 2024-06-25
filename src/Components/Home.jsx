@@ -4,6 +4,7 @@ import Card from './Generics/Card';
 const Home = () => {
   const URL = 'https://rickandmortyapi.com/api/character';
   const GENDERS = [
+    {label: 'All', value: 'all'}, 
     {label: 'Female', value: 'female'}, 
     {label: 'Male', value: 'male'}, 
     {label: 'Genderless', value: 'genderless'},
@@ -49,14 +50,19 @@ const Home = () => {
   const handleGenderChange = (e) => {
     const genderSelected = e.target.value
     setGenderSelect(genderSelected);
-    getCharacters(`${URL}?gender=${genderSelected}`);
+    if(genderSelected === 'all'){
+      getCharacters(URL);
+    }else{
+      getCharacters(`${URL}?gender=${genderSelected}`);
+    }
+    
   }
 
   return (
     <>
-      <h1 className='text-center m-2'>Characters</h1>
+      <h1 className='text-center m-2 font-bold text-2xl'>Characters</h1>
       <form className='max-w-sm mx-auto my-5'>
-        <label className='block mb-2 text-sm font-medium text-gray-900'>Select an option</label>
+        <label className='block mb-2 text-sm font-medium text-gray-900'>Select a Gender</label>
         <select 
         value={genderSelect}
         onChange={handleGenderChange}
@@ -64,8 +70,10 @@ const Home = () => {
           {GENDERS.map(gender => <option value={gender.value}>{gender.label}</option>)}
         </select>
       </form>
-      <section className='grid grid-cols-3 gap-5'>
-        {characters && characters.map(character => <Card key={character.id} character={character}/>)}
+      <section className="flex justify-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 max-w-screen-lg">
+          {characters && characters.map(character => <Card key={character.id} character={character} />)}
+        </div>
       </section>
       <div className='flex justify-center gap-2 m-2'>
         <button onClick={getPrevPage} disabled={pageInfo.prev === null} className='border border-slate-600 rounded-md px-2 py disabled:bg-red-400'>Prev</button>
