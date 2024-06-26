@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import Card from './Generics/Card';
 
 const Home = () => {
-  const URL = 'https://rickandmortyapi.com/api/character';
+  const BASEURL = 'https://rickandmortyapi.com/api/character';
   const GENDERS = [
-    {label: 'All', value: 'all'},
-    {label: 'Female', value: 'female'}, 
-    {label: 'Male', value: 'male'}, 
-    {label: 'Genderless', value: 'genderless'},
-    {label: 'Unknown', value: 'unknown'}
+    { label: 'All', value: 'all' },
+    { label: 'Female', value: 'female' },
+    { label: 'Male', value: 'male' },
+    { label: 'Genderless', value: 'genderless' },
+    { label: 'Unknown', value: 'unknown' }
   ];
   const [genderSelect, setGenderSelect] = useState('');
   const [pageInfo, setPageInfo] = useState({
@@ -17,55 +17,73 @@ const Home = () => {
     next: null,
     prev: null
   });
+
   const [characters, setCharacters] = useState([]);
-  
-  useEffect(() =>{
-    getCharacters(URL);
-  },[]);
 
-  const getNextPage = async() =>{
+  useEffect(() => {
+    const storedGender = localStorage.getItem('selectedGender');
+    const storedCharacters = localStorage.getItem('charactersStorage');
+    
+    if (storedGender) {
+      setGenderSelect(storedGender);
+      if (storedGender === 'all') {
+        getCharacters(BASEURL);
+      } else {
+        getCharacters(`${BASEURL}?gender=${storedGender}`);
+      }
+    } else {
+      getCharacters(BASEURL);
+    }
+    
+    if (storedCharacters) {
+      setCharacters(JSON.parse(storedCharacters));
+    }
+  }, []);
+
+  const getNextPage = async () => {
     await getCharacters(pageInfo.next);
-  }
+  };
 
-  const getPrevPage = async() => {
-    await getCharacters(pageInfo.prev)
-  }
+  const getPrevPage = async () => {
+    await getCharacters(pageInfo.prev);
+  };
 
-  const getCharacters = async(pageUrl) => {
+  const getCharacters = async (pageUrl) => {
     try {
       const response = await fetch(pageUrl);
-      if(!response.ok) {
-        throw new Error ('Error in get info')
+      if (!response.ok) {
+        throw new Error('Error in get info');
       }
       const data = await response.json();
       setCharacters(data.results);
       setPageInfo(data.info);
-    }
-    catch(error) {
+      localStorage.setItem('charactersStorage', JSON.stringify(data.results));
+    } catch (error) {
       console.error('error', error);
     }
   };
-  console.log(characters);
 
   const handleGenderChange = (e) => {
-    const genderSelected = e.target.value
+    const genderSelected = e.target.value;
     setGenderSelect(genderSelected);
-    if(genderSelected === 'all'){
-      getCharacters(URL);
-    }else{
-      getCharacters(`${URL}?gender=${genderSelected}`);
+    localStorage.setItem('selectedGender', genderSelected);
+    
+    if (genderSelected === 'all') {
+      getCharacters(BASEURL);
+    } else {
+      getCharacters(`${BASEURL}?gender=${genderSelected}`);
     }
-  }
+  };
 
   return (
     <>
       <h1 className='text-center m-2 font-bold text-3xl'>Characters</h1>
       <form className='max-w-sm mx-auto my-5'>
         <label className='block mb-2 text-sm font-medium text-gray-900'>Select an option</label>
-        <select 
-        value={genderSelect}
-        onChange={handleGenderChange}
-        className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'>
+        <select
+          value={genderSelect}
+          onChange={handleGenderChange}
+          className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'>
           {GENDERS.map((gender, index) => <option key={index} value={gender.value}>{gender.label}</option>)}
         </select>
       </form>
@@ -78,7 +96,7 @@ const Home = () => {
         <button
           onClick={getPrevPage}
           disabled={pageInfo.prev === null}
-          className='w-12 h-10  flex items-center justify-center px-10 py-2 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-100 disabled:text-indigo-700'>
+          className='w-12 h-10 flex items-center justify-center px-10 py-2 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-100 disabled:text-indigo-700'>
           Prev
         </button>
         <button
@@ -88,11 +106,9 @@ const Home = () => {
           Next
         </button>
       </div>
-
-
-      
     </>
   )
 }
+
 
 export default Home

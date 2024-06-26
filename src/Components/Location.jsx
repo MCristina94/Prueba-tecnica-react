@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import CardLocation from './Generics/CardLocation';
 
 const Location = () => {
+  const BASEURL = 'https://rickandmortyapi.com/api/location'
   const [pageInfoLocations, setPageInfoLocations] = useState({
     count: 0, 
     page: 0, 
@@ -9,10 +10,24 @@ const Location = () => {
     prev: null
   });
   const [locations, setLocations] = useState([]);
-  const URL = 'https://rickandmortyapi.com/api/location'
+  const getCurrentPage = () =>{
+    let pageInfoStorage = localStorage.getItem('pageInfoStorage');
+    if(pageInfoStorage){
+      pageInfoStorage = JSON.parse(pageInfoStorage);
+      if(pageInfoStorage.prev === null){
+        return 1
+      }
+      if(pageInfoStorage.next === null){
+        return pageInfoStorage.pages;
+      }
+      const prev = new URL(pageInfoStorage.prev);
+      const prevPage = parseInt(prev.searchParams.get('page'));
+      return prevPage + 1;
+    }
+  }
 
   useEffect(() => {
-    getLocactions(URL)
+    getLocactions(`${BASEURL}?page=${getCurrentPage()}`)
   },[])
 
   const getLocactions = async(pageUrl) =>{
@@ -23,7 +38,8 @@ const Location = () => {
         }
       const data = await response.json();
       setLocations(data.results)
-      setPageInfoLocations(data.info)          
+      setPageInfoLocations(data.info)
+      localStorage.setItem('pageInfoStorage', JSON.stringify(data.info))          
     }catch(error){
       console.error('Error: ', error);
     }
@@ -46,9 +62,9 @@ const Location = () => {
           {locations && locations.map(location => <CardLocation key={location.id} location={location}/>)}
         </div> 
       </section> 
-      <div className='flex flex-col sm:flex-row justify-center gap-2 my-8'>
-            <button onClick={getPrev} disabled={pageInfoLocations.prev === null} className='w-5 h-10 flex items-center justify-center px-2 py-2 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10 sm:py-4 sm:text-lg sm:px-10 disabled:bg-indigo-100 disabled:text-indigo-700'>Prev</button>
-            <button onClick={getNext} disabled={pageInfoLocations.next === null} className='w-5 h-10 flex items-center justify-center px-2 py-2 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10 sm:py-4 sm:text-lg sm:px-10 disabled:bg-indigo-100 disabled:text-indigo-700'>Next</button>
+      <div className='flex flex-col sm:flex-row justify-center items-center gap-2 my-8'>
+            <button onClick={getPrev} disabled={pageInfoLocations.prev === null} className='w-12 h-10 flex items-center justify-center px-10 py-2 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-100 disabled:text-indigo-700'>Prev</button>
+            <button onClick={getNext} disabled={pageInfoLocations.next === null} className='w-12 h-10 flex items-center justify-center px-10 py-2 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-100 disabled:text-indigo-700'>Next</button>
       </div>
     </>
   )

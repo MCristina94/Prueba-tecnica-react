@@ -71,3 +71,12 @@ function App() {
 }
 
 export default App;
+
+//pendiente:
+    //5. Create data persistency between refreshes, meaning that when i
+    //refresh the page i should see the last characters that i saw.
+    //6. Performance: do not code, answer verbally. If we where to render 1
+    // million of these cards what impact would it cause? what can we do to
+    //render them with out performance issues?
+    // 7. custom hook
+  
