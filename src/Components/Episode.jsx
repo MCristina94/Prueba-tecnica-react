@@ -38,13 +38,13 @@ const Episode = () => {
     }
   return ( 
     <>
-        <h2 className='text-center m-2 font-bold text-3xl'>EPISODES</h2>
+        <h2 className='text-center m-2 font-bold text-3xl'>Episodes</h2>
         <section className='flex justify-center'>
            <div className='grid sm:grid-cols-2 md:grid-cols-3 gap-5 max-w-screen-lg'>
                 {episodes && episodes.map(episode => <CardEpisode key={episode.id} episode={episode}/>)}
             </div> 
         </section> 
-        <div className='flex flex-col sm:flex-row justify-center gap-2 m-2'>
+        <div className='flex flex-col sm:flex-row justify-center gap-2 my-8'>
             <button onClick={getPrev} disabled={pageInfoEpisode.prev === null} className='w-5 h-10 flex items-center justify-center px-2 py-2 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10 sm:py-4 sm:text-lg sm:px-10 disabled:bg-indigo-100 disabled:text-indigo-700'>Prev</button>
             <button onClick={getNext} disabled={pageInfoEpisode.next === null} className='w-5 h-10 flex items-center justify-center px-2 py-2 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10 sm:py-4 sm:text-lg sm:px-10 disabled:bg-indigo-100 disabled:text-indigo-700'>Next</button>
       </div>

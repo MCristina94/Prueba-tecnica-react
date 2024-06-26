@@ -4,6 +4,7 @@ import Header from './Components/Header';
 import Home from './Components/Home';
 import Episode from './Components/Episode'
 import Location from './Components/Location'
+import Footer from './Components/Footer';
 
 function App() {
   return (
@@ -17,9 +18,9 @@ function App() {
           <Route path='/episode' element={<Episode/>}/>
           <Route path='/location' element={<Location/>}/>
         </Routes>
-        
       </main>
       <footer>
+        <Footer/>
       </footer>
     </>
     // <div className='bg-slate-200 flex flex-col items-center w-screen h-screen p-10 text-xl'>

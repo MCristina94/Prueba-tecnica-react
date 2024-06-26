@@ -46,7 +46,7 @@ const Location = () => {
           {locations && locations.map(location => <CardLocation key={location.id} location={location}/>)}
         </div> 
       </section> 
-      <div className='flex flex-col sm:flex-row justify-center gap-2 m-2'>
+      <div className='flex flex-col sm:flex-row justify-center gap-2 my-8'>
             <button onClick={getPrev} disabled={pageInfoLocations.prev === null} className='w-5 h-10 flex items-center justify-center px-2 py-2 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10 sm:py-4 sm:text-lg sm:px-10 disabled:bg-indigo-100 disabled:text-indigo-700'>Prev</button>
             <button onClick={getNext} disabled={pageInfoLocations.next === null} className='w-5 h-10 flex items-center justify-center px-2 py-2 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10 sm:py-4 sm:text-lg sm:px-10 disabled:bg-indigo-100 disabled:text-indigo-700'>Next</button>
       </div>

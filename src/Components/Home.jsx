@@ -65,8 +65,8 @@ const Home = () => {
         <select 
         value={genderSelect}
         onChange={handleGenderChange}
-        className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'>
-          {GENDERS.map(gender => <option value={gender.value}>{gender.label}</option>)}
+        className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'>
+          {GENDERS.map((gender, index) => <option key={index} value={gender.value}>{gender.label}</option>)}
         </select>
       </form>
       <section className='flex justify-center'>
@@ -74,7 +74,7 @@ const Home = () => {
           {characters && characters.map(character => <Card key={character.id} character={character} />)}
         </div>
       </section>
-      <div className='flex flex-col sm:flex-row justify-center gap-2 m-2 '>
+      <div className='flex flex-col sm:flex-row justify-center gap-2 my-8'>
         <button onClick={getPrevPage} disabled={pageInfo.prev === null} className='w-5 h-10 flex items-center justify-center px-2 py-2 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10 sm:py-4 sm:text-lg sm:px-10 disabled:bg-indigo-100 disabled:text-indigo-700'>Prev</button>
         <button onClick={getNextPage} disabled={pageInfo.next === null} className='w-5 h-10 flex items-center justify-center px-2 py-2 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10 sm:py-4 sm:text-lg sm:px-10 disabled:bg-indigo-100 disabled:text-indigo-700'>Next</button>
       </div>
