@@ -5,6 +5,7 @@ import Home from './Components/Home';
 import Episode from './Components/Episode'
 import Location from './Components/Location'
 import Footer from './Components/Footer';
+import DetailLocation from './Components/DetailLocation';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path='/' element={<Home/>}/>
           <Route path='/episode' element={<Episode/>}/>
           <Route path='/location' element={<Location/>}/>
+          <Route path='/location/detail-location/:id' element={<DetailLocation/>}/>
         </Routes>
       </main>
       <footer>

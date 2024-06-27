@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 
 const CardEpisode = ({episode}) => {
 
@@ -20,6 +21,11 @@ const CardEpisode = ({episode}) => {
             <p className='text-cod-gray-header-hover'>Air Date: {episode.air_date}</p>
             <p className='text-cod-gray-header-hover'>Created: {episode.created}</p>
         </article>
+        <Link >
+        <div className='mt-8 flex justify-start'>
+          <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">characters</button>
+        </div>
+        </Link>
     </section>
   )
 }

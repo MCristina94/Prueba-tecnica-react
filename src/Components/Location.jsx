@@ -10,6 +10,7 @@ const Location = () => {
     prev: null
   });
   const [locations, setLocations] = useState([]);
+    
   const getCurrentPage = () =>{
     let pageInfoStorage = localStorage.getItem('pageInfoStorage');
     if(pageInfoStorage){
@@ -44,7 +45,7 @@ const Location = () => {
       console.error('Error: ', error);
     }
   }
-
+  
   const getNext = async() => {
     await getLocactions(pageInfoLocations.next)
   }
@@ -52,8 +53,9 @@ const Location = () => {
   const getPrev = async() => {
     await getLocactions(pageInfoLocations.prev)
   }
-  console.log(locations);
-  console.log(pageInfoLocations);
+  // console.log(locations);
+  // console.log(pageInfoLocations);
+
   return (
     <>
       <h2 className='text-center m-2 font-bold text-3xl'>Location</h2>
