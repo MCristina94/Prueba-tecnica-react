@@ -62,7 +62,7 @@ const Home = () => {
       console.error('error', error);
     }
   };
-
+console.log(characters);
   const handleGenderChange = (e) => {
     const genderSelected = e.target.value;
     setGenderSelect(genderSelected);

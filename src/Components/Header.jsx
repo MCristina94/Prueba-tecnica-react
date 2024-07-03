@@ -20,6 +20,7 @@ const Header = () => {
           <Link to={'/'} onClick={() => handleClick('character')} className= {`mx-5  hover:text-cod-gray-header-hover ${isSelect === 'character'? 'text-cod-gray-header-namePage text-decoration-line: underline' : null}`}>Characters</Link>
           <Link to={'/episode'} onClick={() => handleClick('episode')} className= {`mx-5  hover:text-cod-gray-header-hover ${isSelect === 'episode' ? 'text-cod-gray-header-namePage text-decoration-line: underline' : null}`}>Episode</Link>
           <Link to={'/location'} onClick={() => handleClick('location')} className= {`mx-5  hover:text-cod-gray-header-hover ${isSelect === 'location' ? 'text-cod-gray-header-namePage text-decoration-line: underline ' : null}`}>Location</Link>
+          <Link to={'/game'} onClick={() => handleClick('game')} className= {`mx-5  hover:text-cod-gray-header-hover ${isSelect === 'game' ? 'text-cod-gray-header-namePage text-decoration-line: underline ' : null}`}>Game</Link>
         </nav>
          {/* Hamburger button for small screens */}
         <nav className='md:hidden flex flex-col'>
@@ -37,6 +38,9 @@ const Header = () => {
               </li>
               <li>
               <Link to={'/location'} className='block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0'>Locations</Link>
+              </li>
+              <li>
+              <Link to={'/game'} className='block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0'>Game</Link>
               </li>
             </ul>
           </article>
